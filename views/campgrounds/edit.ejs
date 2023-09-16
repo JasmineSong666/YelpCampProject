@@ -1,0 +1,110 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/stylesheets/images.css" class="rel">
+    <div class="row d-flex col-md-8 offset-md-2 my-5">
+        <div class="card shadow py-4 ">
+            <div class="card-body px-1">
+                <h1 class="text-center mb-4">Edit campground</h1>
+                <div class="col-md-10 offset-md-1">
+                    <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST"
+                        enctype="multipart/form-data" novalidate class="validated-form">
+                        <div class="mb-3">
+                            <label class="form-label" for="title">Title</label>
+                            <input class="form-control" type="text" id="title" name="campground[title]"
+                                value="<%= campground.title %>" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="location">Location</label>
+                            <input class="form-control" type="text" id="location" name="campground[location]"
+                                value="<%= campground.location %>" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="price">Campground Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="price-label">$</span>
+                                <input id="price" type="text" class="form-control" placeholder="0.00" aria-label="price"
+                                    aria-describedby="price-label" name="campground[price]"
+                                    value="<%= campground.price %>" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="description">Description</label>
+                            <textarea class="form-control" type="text" id="description" name="campground[description]"
+                                required><%= campground.description %></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <!-- <div class="mb-3">
+                    <label class="form-label" for="image">Add Images</label>
+                    <input type="file" name="image" id="image" multiple>
+                </div> -->
+                        <div class=" custom-file">
+                            <label for="image" class="form-label ">Add Images</label>
+                            <div class="form-file custom-file">
+                                <input class="form-control bs-custom-file-input" type="file" id="image" name="image"
+                                    multiple onchange="previewMultiple(event)">
+                                <!-- onchange="previewMultiple(event)": the previewMultiple(event) JavaScript function should be called when the user selects a file using an <input type="file"> element. -->
+                                <label for="image" class="form-label custom-file-label"></label>
+                            </div>
+                            <div id="formFile"></div>
+                            <div id="warning" class="text-danger"></div>
+                        </div>
+                        <!-- delete the images -->
+                        <p>Delete Images</p>
+                        <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+                            <% campground.images.forEach(function(img,i){%>
+                                <div class="col">
+                                    <div class="card">
+                                        <label for="image-<%= i %>">
+                                            <img src="<%= img.thumbnail %>" alt="" class="card-img">
+                                            <!-- an overlay container within the card's image area. It's used for positioning content over the image -->
+                                            <div class="card-img-overlay text-end pt-1 pe-2">
+                                                <input class="form-check-input" type="checkbox" name="deleteImages[]"
+                                                    id="image-<%= i %>" value="<%= img.filename %>">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <!-- (row-cols-1) display one column on small screens 
+(row-cols-md-4) four columns on medium and larger screens 
+(g-4) adds some horizontal gutter spacing (gap) between columns. -->
+                        <!-- (text-end) aligns text and content to the right side within the container. positioning content to the right of the card's image
+(pt-1) adds padding to the top ( pt stands for "padding-top")
+(pe-2) padding to the right (pe stands for "padding-end" ) -->
+                        <!-- The square brackets [] in the name attribute indicate that 
+the input element represents an array of values with the name "deleteImages." 
+When you select multiple checkboxes with the same name attribute 
+and use square brackets, 
+it tells the browser to group their values into an array 
+when you submit the form. This is useful when you have a group of checkboxes, 
+and you want to collect all the selected values into a single array on the server-side. -->
+                        <!-- why label wrap img and input:
+When you click on the label, it triggers a click on the associated input element, which is the checkbox in this case. 
+By wrapping the image and the checkbox input within the same <label>, you create a visually integrated UI element. 
+When users click anywhere within the <label> (including the image), it toggles the state of the checkbox, making it easier for users to select or deselect images for deletion. 
+This is a common UI pattern for checkboxes associated with labels to enhance user experience and accessibility.-->
+                        <div class="mb-3 d-grid">
+                            <button class="btn btn-info">Update campground</button>
+                        </div>
+                    </form>
+                    <a href="/campgrounds/<%= campground._id %>" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Back to campground</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    </div>

@@ -1,0 +1,77 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/stylesheets/images.css" class="rel">
+    <div class="row d-flex col-md-8 offset-md-2 my-5 ">
+        <div class="card shadow py-4 mb-3">
+            <div class="card-body px-4 ">
+                <h1 class="text-center mb-4">New campground</h1>
+
+                <div class="col-md-10 offset-md-1">
+                    <form action="/campgrounds" method="POST" novalidate class="validated-form"
+                        enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label" for="title">Title</label>
+                            <input class="form-control" type="text" id="title" name="campground[title]" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="location">Location</label>
+                            <input class="form-control" type="text" id="location" name="campground[location]" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="price">Campground Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="price-label">$</span>
+                                <input id="price" type="text" class="form-control" placeholder="0.00" aria-label="price"
+                                    aria-describedby="price-label" name="campground[price]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="description">Description</label>
+                            <textarea class="form-control" type="text" id="description" name="campground[description]"
+                                required></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <!-- <input type="file" name="image" id="" multiple> -->
+                        <div class="mb-3">
+                            <label class="form-label ">Choose Images</label>
+                            <div class="form-file custom-file">
+                                <input class="form-control bs-custom-file-input" type="file" id="image" name="image"
+                                    multiple onchange="previewMultiple(event)">
+                                <!-- onchange="previewMultiple(event)": the previewMultiple(event) JavaScript function should be called when the user selects a file using an <input type="file"> element. -->
+                                <label for="image" class="form-label custom-file-label"></label>
+                            </div>
+                            <div id="formFile"></div>
+                            <div id="warning" class="text-danger"></div>
+                        </div>
+
+
+                        <!-- <div class="mb-3">
+    <label class="form-label" for="image">Image Url</label>
+    <input class="form-control" type="text" id="image" name="campground[image]" required>
+    <div class="valid-feedback">
+        Looks good!
+    </div>
+</div> -->
+                        <div class="mb-3 d-grid">
+                            <button class="btn btn-success">Add campground</button>
+                        </div>
+                    </form>
+                    <a href="/campgrounds"
+                        class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">All
+                        campgrounds</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
